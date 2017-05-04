@@ -50,8 +50,8 @@ public class DataforPari {
  			dt.addColumn("date du Pari");
  			dt.addColumn("nmb de match");
  			dt.addColumn("nmb de match Gagnant");
- 			dt.addColumn("Cote totale");
  			dt.addColumn("Mises");
+ 			dt.addColumn("Cote totale");
  			dt.addColumn("Gains");
  	    	Statement st = new databaseProcessing.Connect_DB().connexion.createStatement();
  			String query="SELECT ID, datePari, nmbMatch, nmbMatchGagnant, cotesTotale, mises, gains FROM pari WHERE ID_user="+ID_user+" GROUP BY ID";
@@ -59,7 +59,7 @@ public class DataforPari {
 
  			while(rset.next()) {
  				Object []tableau={rset.getInt("ID"),rset.getString("datePari"),rset.getString("nmbMatch"),rset.getString("nmbMatchGagnant"),
- 						rset.getString("cotesTotale"), rset.getString("mises"), rset.getString("gains")};
+ 						rset.getString("mises"), rset.getString("cotesTotale"), rset.getString("gains")};
  				dt.addRow(tableau);
  			}
  			rset.close();

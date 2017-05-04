@@ -11,6 +11,8 @@ public class Main {
 		System.out.println(test);
 		Home session = new Home();
 		session.setVisible(true);
+		//Bankroll session = new Bankroll();
+		//session.setVisible(true);
 	}
 
 }

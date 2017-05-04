@@ -13,7 +13,7 @@ public class Connect_DB {
 		public Connect_DB()	{
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
-				url = new String("jdbc:mysql://localhost:3306/mysportbets");
+				url = new String("jdbc:mysql://localhost:3306/mysportbets_2");
 				connexion = (Connection) DriverManager.getConnection(url,"root","");
 				System.out.println("Connexion réussi");
 			} catch (ClassNotFoundException e) {
