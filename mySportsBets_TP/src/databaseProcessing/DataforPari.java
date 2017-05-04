@@ -1,7 +1,11 @@
 package databaseProcessing;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import databaseProcessing.Connect_DB;
 
@@ -35,5 +39,37 @@ public class DataforPari {
 	    }
 	    return Integer.toString(BDnmbpari) +","+ Integer.toString(BDmisestotale) +","+ Integer.toString(BDgainstotal) +","+ Integer.toString(BDnmbMatchTotal) +","+ Integer.toString(BDnmbMGTotal);
     }
+    
+// Liste des paris de l'utilisateur
+    public DefaultTableModel tablePariList(int ID_user){
+ 		
+ 		DefaultTableModel dt = new DefaultTableModel();
+ 		ResultSet rset;
+ 		try{
+ 			dt.addColumn("ID");
+ 			dt.addColumn("date du Pari");
+ 			dt.addColumn("nmb de match");
+ 			dt.addColumn("nmb de match Gagnant");
+ 			dt.addColumn("Cote totale");
+ 			dt.addColumn("Mises");
+ 			dt.addColumn("Gains");
+ 	    	Statement st = new databaseProcessing.Connect_DB().connexion.createStatement();
+ 			String query="SELECT ID, datePari, nmbMatch, nmbMatchGagnant, cotesTotale, mises, gains FROM pari WHERE ID_user="+ID_user+" GROUP BY ID";
+ 			rset=st.executeQuery(query);
+
+ 			while(rset.next()) {
+ 				Object []tableau={rset.getInt("ID"),rset.getString("datePari"),rset.getString("nmbMatch"),rset.getString("nmbMatchGagnant"),
+ 						rset.getString("cotesTotale"), rset.getString("mises"), rset.getString("gains")};
+ 				dt.addRow(tableau);
+ 			}
+ 			rset.close();
+ 			
+ 	    } catch(SQLException ex){
+ 			ex.printStackTrace();
+ 			JOptionPane.showMessageDialog(null,"Not Found","Message d’avertissement",JOptionPane.ERROR_MESSAGE);			
+ 		}	
+ 		return dt;
+ 	}
+
 
 }

@@ -88,11 +88,20 @@ public class Bankroll extends JFrame {
 				DBnmbMGTotal = Integer.parseInt(resultBankrollArray[4]);
 				DBbankroll = DBgainstotal - DBmisestotale;
 				
-		    	nmbpari.setText("Vous avez jouez un nombre de "+DBnmbpari+" paris.");
-				misestotale.setText("Votre mise globale est de "+DBmisestotale+" Euros.");
-				gainstotale.setText("Vos gains sont élevés à "+DBgainstotal+" Euros.");
-				DBbankroll = DBgainstotal - DBmisestotale;
-				bankroll.setText("Votre Bankroll est de "+DBbankroll+" Euros.");
+				if (datepari == "'2017/01/01' and '2017/12/31'") {
+					nmbpari.setText("Vous avez jouez un nombre de "+DBnmbpari+" paris.");
+					misestotale.setText("Votre mise globale est de "+DBmisestotale+" Euros.");
+					gainstotale.setText("Vos gains sont élevés à "+DBgainstotal+" Euros.");
+					DBbankroll = DBgainstotal - DBmisestotale;
+					bankroll.setText("Votre Bankroll est de "+DBbankroll+" Euros.");
+				} else {
+					nmbpari.setText("Vous avez jouez un nombre de "+DBnmbpari+" paris ce mois-ci.");
+					misestotale.setText("Votre mise globale est de "+DBmisestotale+" Euros ce mois-ci.");
+					gainstotale.setText("Vos gains sont élevés à "+DBgainstotal+" Euros ce mois-ci.");
+					DBbankroll = DBgainstotal - DBmisestotale;
+					bankroll.setText("Votre Bankroll est de "+DBbankroll+" Euros ce mois-ci.");
+				}
+				
 			}
 		});
 		validCB.setBounds(648, 40, 26, 23);
