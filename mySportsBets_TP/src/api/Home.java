@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -26,9 +28,10 @@ public class Home extends JFrame {
 	private JTextField TFsearch;
 	private JTable pari;
 	private JButton addPari, updatePari, deletePari, Bankroll;
-	private String datePari, Sgain;
-	private int pariID, nmbMatch, nmbMatchGagnant;
-	private float mise, gain, coteTotale;
+	private String datePari;
+	private int pariID, nmbMatch, nmbMatchGagnant = 0;
+	private float mise, coteTotale;
+	String gain = "NULL";
 	
 	public Home() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,14 +68,13 @@ public class Home extends JFrame {
                 	nmbMatchGagnant = Integer.parseInt(pari.getValueAt(row,3).toString());
                 	mise = Float.parseFloat(pari.getValueAt(row,4).toString());
                 	coteTotale = Float.parseFloat(pari.getValueAt(row,5).toString());
-                	if (pari.getValueAt(row,6) !=  null) {
-                		gain = Float.parseFloat(pari.getValueAt(row,6).toString());
+                	if (pari.getValueAt(row,6) !=  null && pari.getValueAt(row,6) !=  "") {
+                		gain = pari.getValueAt(row,6).toString();
     	                System.out.println(pariID+";"+datePari+";"+nmbMatch+";"+nmbMatchGagnant+";"+mise+";"+coteTotale+";"+gain);
                 	} else {
-                		Sgain = null;
-    	                System.out.println(pariID+";"+datePari+";"+nmbMatch+";"+nmbMatchGagnant+";"+mise+";"+coteTotale+";"+Sgain);
+                		gain = 	"NULL";
+    	                System.out.println(pariID+";"+datePari+";"+nmbMatch+";"+nmbMatchGagnant+";"+mise+";"+coteTotale+";"+gain);
                 	}
-
             }	           
         });
 		JScrollPane SCtable = new JScrollPane(pari);		
@@ -90,10 +92,27 @@ public class Home extends JFrame {
 		
 		updatePari = new JButton("Modifier un pari");
 		updatePari.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		updatePari.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new DataforPari().updatePari(pariID, datePari, nmbMatch, nmbMatchGagnant, mise, coteTotale, gain);
+				new DataforPari().tablePariList(1).fireTableDataChanged();
+                pari.setModel(new DataforPari().tablePariList(1));
+                pariID = 0;
+			}
+		});
+
 		southPan.add(updatePari);
 		
 		deletePari = new JButton("Supprimer un pari");
 		deletePari.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		deletePari.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new DataforPari().deletePari(pariID);
+				// Update PariList
+				new DataforPari().tablePariList(1).fireTableDataChanged();
+				pari.setModel(new DataforPari().tablePariList(1));
+			}
+		});
 		southPan.add(deletePari);
 		
 		Bankroll = new JButton("Bankroll");
