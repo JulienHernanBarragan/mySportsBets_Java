@@ -31,7 +31,7 @@ public class Home extends JFrame {
 	private String datePari;
 	private int pariID, nmbMatch, nmbMatchGagnant = 0;
 	private float mise, coteTotale;
-	String gain = "NULL";
+	private String gain = "NULL";
 	
 	public Home() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,6 +88,12 @@ public class Home extends JFrame {
 		
 		addPari = new JButton("Ajouter un pari");
 		addPari.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		addPari.addActionListener(new ActionListener()  {
+			public void actionPerformed(ActionEvent e) {
+				Add_pari session = new Add_pari();
+				session.setVisible(true);
+			}
+		});
 		southPan.add(addPari);
 		
 		updatePari = new JButton("Modifier un pari");
@@ -117,6 +123,12 @@ public class Home extends JFrame {
 		
 		Bankroll = new JButton("Bankroll");
 		Bankroll.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		Bankroll.addActionListener(new ActionListener()  {
+			public void actionPerformed(ActionEvent e) {
+				Bankroll session = new Bankroll();
+				session.setVisible(true);
+			}
+		});
 		southPan.add(Bankroll);
 	}
 }
