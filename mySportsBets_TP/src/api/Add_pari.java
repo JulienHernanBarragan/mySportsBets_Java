@@ -18,16 +18,16 @@ import databaseProcessing.DataforPari;
 
 public class Add_pari extends JFrame {
 	
-	JPanel pan;
-	JLabel sitePari, datePari, nmbMatch, nmbMatchGagnant, mise, coteTotale, gains;
-	JTextField TFsitePari, TFdatePari, TFmise, TFcoteTotale, TFgains;
-	JSpinner SnmbMatch, SnmbMatchGagnant;
-	JButton Breturn, BaddPari;
-	String RdatePari, RmaisonPari, Rgain;
-	int RnmbMatch, RnmbMatchGagnant;
-	float Rmise, RcoteTotale;
+	private JPanel pan;
+	private JLabel sitePari, datePari, nmbMatch, nmbMatchGagnant, mise, coteTotale, gains;
+	private JTextField TFsitePari, TFdatePari, TFmise, TFcoteTotale, TFgains;
+	private JSpinner SnmbMatch, SnmbMatchGagnant;
+	private JButton Breturn, BaddPari;
+	private String RdatePari, RmaisonPari, Rgain;
+	private int RnmbMatch, RnmbMatchGagnant;
+	private float Rmise, RcoteTotale;
 	
-	public Add_pari () {
+	public Add_pari (int idUser, String nomUser) {
 		setBounds(100, 100, 800, 400);
 		pan = new JPanel();
 		pan.setBackground(new Color(102, 204, 153));
@@ -124,12 +124,12 @@ public class Add_pari extends JFrame {
 				RnmbMatchGagnant = Integer.parseInt(SnmbMatchGagnant.getValue().toString());
 				if (TFgains.getText() == "0.0") {
 					Rgain = "NULL";
-					new DataforPari().addPari(1,RmaisonPari, RdatePari, RnmbMatch, RnmbMatchGagnant, Rmise, RcoteTotale, Rgain);
+					new DataforPari().addPari(idUser,RmaisonPari, RdatePari, RnmbMatch, RnmbMatchGagnant, Rmise, RcoteTotale, Rgain);
 				} else {
 					Rgain = TFgains.getText();
-					new DataforPari().addPari(1,RmaisonPari, RdatePari, RnmbMatch, RnmbMatchGagnant, Rmise, RcoteTotale, Rgain);
+					new DataforPari().addPari(idUser,RmaisonPari, RdatePari, RnmbMatch, RnmbMatchGagnant, Rmise, RcoteTotale, Rgain);
 				}
-				Home session = new Home();
+				Home session = new Home(idUser, nomUser);
 				session.setVisible(true);
 				dispose();
 			}
@@ -140,7 +140,7 @@ public class Add_pari extends JFrame {
 		Breturn.setBounds(84, 280, 236, 60);
 		Breturn.addActionListener(new ActionListener()  {
 			public void actionPerformed(ActionEvent e) {
-				Home session = new Home();
+				Home session = new Home(idUser, nomUser);
 				session.setVisible(true);
 				dispose();
 			}

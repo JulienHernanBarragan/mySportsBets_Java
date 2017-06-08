@@ -12,16 +12,16 @@ import databaseProcessing.Connect_DB;
 public class DataforPari {
 
 	//Fonction pour connexion à la base de données pour bankroll
-    public String dataBankroll(String datepari) {	
+    public String dataBankroll(String datepari, int userId) {	
     	int BDnmbpari = 0, BDmisestotale = 0, BDgainstotal = 0, BDnmbMatchTotal = 0, BDnmbMGTotal = 0;
     	
     	try 
 	    {
 	    	Statement st = new Connect_DB().connexion.createStatement();
-	    	ResultSet requestPari = st.executeQuery("SELECT COUNT(ID) AS nmbpari, SUM(mises) AS misestotale, SUM(gains) AS gainstotal, "+
-	    											"SUM(nmbMatch) AS nmbMatchTotal, SUM(nmbmatchGagnant) AS nmbMGTotal "+
-	    											"FROM pari "+
-	    											"WHERE datePari between "+datepari);
+	    	ResultSet requestPari = st.executeQuery("SELECT COUNT(P.ID) AS nmbpari, SUM(P.mises) AS misestotale, SUM(P.gains) AS gainstotal, "+
+	    											"SUM(P.nmbMatch) AS nmbMatchTotal, SUM(P.nmbmatchGagnant) AS nmbMGTotal "+
+	    											"FROM pari AS P, user AS U "+
+	    											"WHERE P.ID_user=U.ID AND datePari between "+datepari+" AND U.ID="+userId);
 	    		while (requestPari.next()) {
 	    			BDnmbpari = requestPari.getInt("nmbpari");
 	    			BDmisestotale = requestPari.getInt("misestotale");

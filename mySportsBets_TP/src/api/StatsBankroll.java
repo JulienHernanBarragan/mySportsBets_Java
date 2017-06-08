@@ -16,20 +16,18 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 public class StatsBankroll extends JFrame {
-	
-	private static final long serialVersionUID = 1L;
 	static JPanel pan, panNorth, panChartSouth, panSouth;
 	@SuppressWarnings("rawtypes")
-	JComboBox CBdate;
-	JButton validCB;
-	JLabel Bankroll;
-	int DBnmbpari, DBmisestotale, DBgainstotal, DBnmbMatchTotal, DBnmbMPTotal, DBnmbMGTotal, DBbankroll;
-	String datepari = "'2017/01/01' and '2017/12/31'";
-	String resultBankroll, resultBankrollArray [] ;
-	DefaultPieDataset dataPieforMatch;
-	JFreeChart pieChartRatioMatch, barChartGainsMises, lineChartBankroll;
-	ChartPanel cPanel, cPanel2, cPanel3;
-	DefaultCategoryDataset datasetGainsMises, datasetBankroll;
+	private JComboBox CBdate;
+	private JButton validCB;
+	private JLabel Bankroll;
+	private int DBnmbpari, DBmisestotale, DBgainstotal, DBnmbMatchTotal, DBnmbMPTotal, DBnmbMGTotal, DBbankroll;
+	private String datepari = "'2017/01/01' and '2017/12/31'";
+	private String resultBankroll, resultBankrollArray [] ;
+	private DefaultPieDataset dataPieforMatch;
+	private JFreeChart pieChartRatioMatch, barChartGainsMises, lineChartBankroll;
+	private ChartPanel cPanel, cPanel2, cPanel3;
+	private DefaultCategoryDataset datasetGainsMises, datasetBankroll;
 	
 	// Data for graph bankroll
 	int misesJanvier, misesFevrier, misesMars, misesAvril, misesMai, misesJuin, misesJuillet, misesAout, misesSeptembre, misesOctobre, misesNovembre, misesDecembre;
@@ -37,7 +35,7 @@ public class StatsBankroll extends JFrame {
 	int bankrollJanvier, bankrollFevrier, bankrollMars, bankrollAvril, bankrollMai, bankrollJuin, bankrollJuillet, bankrollAout, bankrollSeptembre, bankrollOctobre, bankrollNovembre, bankrollDecembre;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public StatsBankroll() {
+	public StatsBankroll(int idUser, String nomUser) {
 		
 		pan = new JPanel();
     	pan.setLayout(null);
@@ -47,7 +45,7 @@ public class StatsBankroll extends JFrame {
 		pan.setLayout(new GridLayout(0, 1, 0, 0));
 		setLocationRelativeTo(null);
 		
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll(datepari);
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll(datepari, idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		DBnmbpari = Integer.parseInt(resultBankrollArray[0]);
 		DBmisestotale = Integer.parseInt(resultBankrollArray[1]);
@@ -65,73 +63,73 @@ public class StatsBankroll extends JFrame {
 		panNorth.setBackground(new Color(102, 204, 153));
 		
 		// Get data for Graph bankroll
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/01/31'");
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/01/31'", idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		misesJanvier = Integer.parseInt(resultBankrollArray[1]);
 		gainsJanvier = Integer.parseInt(resultBankrollArray[2]);
 		bankrollJanvier = gainsJanvier - misesJanvier;
 		
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/02/28'");
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/02/28'", idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		misesFevrier = Integer.parseInt(resultBankrollArray[1]);
 		gainsFevrier = Integer.parseInt(resultBankrollArray[2]);
 		bankrollFevrier = gainsFevrier - misesFevrier;
 		
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/03/31'");
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/03/31'", idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		misesMars = Integer.parseInt(resultBankrollArray[1]);
 		gainsMars = Integer.parseInt(resultBankrollArray[2]);
 		bankrollMars = gainsMars - misesMars;
 		
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/04/30'");
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/04/30'", idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		misesAvril = Integer.parseInt(resultBankrollArray[1]);
 		gainsAvril = Integer.parseInt(resultBankrollArray[2]);
 		bankrollAvril = gainsAvril - misesAvril;
 		
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/05/31'");
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/05/31'", idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		misesMai = Integer.parseInt(resultBankrollArray[1]);
 		gainsMai = Integer.parseInt(resultBankrollArray[2]);
 		bankrollMai = gainsMai - misesMai;
 		
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/06/30'");
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/06/30'", idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		misesJuin = Integer.parseInt(resultBankrollArray[1]);
 		gainsJuin = Integer.parseInt(resultBankrollArray[2]);
 		bankrollJuin = gainsJuin - misesJuin;
 		
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/07/31'");
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/07/31'", idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		misesJuillet = Integer.parseInt(resultBankrollArray[1]);
 		gainsJuillet = Integer.parseInt(resultBankrollArray[2]);
 		bankrollJuillet = gainsJuillet - misesJuillet;
 		
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/08/31'");
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/08/31'", idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		misesAout = Integer.parseInt(resultBankrollArray[1]);
 		gainsAout = Integer.parseInt(resultBankrollArray[2]);
 		bankrollAout = gainsAout - misesAout;
 		
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/09/30'");
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/09/30'", idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		misesSeptembre = Integer.parseInt(resultBankrollArray[1]);
 		gainsSeptembre = Integer.parseInt(resultBankrollArray[2]);
 		bankrollSeptembre = gainsSeptembre - misesSeptembre;
 		
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/10/31'");
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/10/31'", idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		misesOctobre = Integer.parseInt(resultBankrollArray[1]);
 		gainsOctobre = Integer.parseInt(resultBankrollArray[2]);
 		bankrollOctobre = gainsOctobre - misesOctobre;
 		
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/11/30'");
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/11/30'", idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		misesNovembre = Integer.parseInt(resultBankrollArray[1]);
 		gainsNovembre = Integer.parseInt(resultBankrollArray[2]);
 		bankrollNovembre = gainsNovembre - misesNovembre;
 		
-		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/12/31'");
+		resultBankroll = new databaseProcessing.DataforPari().dataBankroll("'2017/01/01' and '2017/12/31'", idUser);
 		resultBankrollArray = resultBankroll.split(",");
 		misesDecembre = Integer.parseInt(resultBankrollArray[1]);
 		gainsDecembre = Integer.parseInt(resultBankrollArray[2]);
@@ -203,7 +201,7 @@ public class StatsBankroll extends JFrame {
 		    		datepari = "'2017/12/01' and '2017/12/31'";
 		    	} 
  
-		    	resultBankroll = new databaseProcessing.DataforPari().dataBankroll(datepari);
+		    	resultBankroll = new databaseProcessing.DataforPari().dataBankroll(datepari, idUser);
 				resultBankrollArray = resultBankroll.split(",");
 				DBnmbpari = Integer.parseInt(resultBankrollArray[0]);
 				DBmisestotale = Integer.parseInt(resultBankrollArray[1]);

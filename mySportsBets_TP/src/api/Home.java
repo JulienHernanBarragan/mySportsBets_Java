@@ -33,7 +33,7 @@ public class Home extends JFrame {
 	private float mise, coteTotale;
 	private String gain = "NULL";
 	
-	public Home() {
+	public Home(int idUser, String nomUser) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 800);
 		setTitle("MySportsBets : Home");
@@ -48,12 +48,12 @@ public class Home extends JFrame {
 		northPan.setBackground(new Color(102, 204, 153));
 		pan.add(northPan, BorderLayout.NORTH);
 		
-		welcomeUser = new JLabel("Bienvenue Utilisateur !");
+		welcomeUser = new JLabel("Bienvenue "+nomUser+" !");
 		welcomeUser.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		northPan.add(welcomeUser);
 		
 		// Center panel
-		pari = new JTable(new DataforPari().tablePariList(1));
+		pari = new JTable(new DataforPari().tablePariList(idUser));
 		pari.setAutoCreateRowSorter(true);
 		pari.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		pari.setFont(new Font("Trebuchet MS", Font.PLAIN, 18));
@@ -90,7 +90,7 @@ public class Home extends JFrame {
 		addPari.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		addPari.addActionListener(new ActionListener()  {
 			public void actionPerformed(ActionEvent e) {
-				Add_pari session = new Add_pari();
+				Add_pari session = new Add_pari(idUser, nomUser);
 				session.setVisible(true);
 				dispose();
 			}
@@ -102,8 +102,8 @@ public class Home extends JFrame {
 		updatePari.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new DataforPari().updatePari(pariID, datePari, nmbMatch, nmbMatchGagnant, mise, coteTotale, gain);
-				new DataforPari().tablePariList(1).fireTableDataChanged();
-                pari.setModel(new DataforPari().tablePariList(1));
+				new DataforPari().tablePariList(idUser).fireTableDataChanged();
+                pari.setModel(new DataforPari().tablePariList(idUser));
                 pariID = 0;
 			}
 		});
@@ -116,8 +116,8 @@ public class Home extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				new DataforPari().deletePari(pariID);
 				// Update PariList
-				new DataforPari().tablePariList(1).fireTableDataChanged();
-				pari.setModel(new DataforPari().tablePariList(1));
+				new DataforPari().tablePariList(idUser).fireTableDataChanged();
+				pari.setModel(new DataforPari().tablePariList(idUser));
                 pariID = 0;
 			}
 		});
@@ -127,7 +127,7 @@ public class Home extends JFrame {
 		Bankroll.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		Bankroll.addActionListener(new ActionListener()  {
 			public void actionPerformed(ActionEvent e) {
-				StatsBankroll session = new StatsBankroll();
+				StatsBankroll session = new StatsBankroll(idUser, nomUser);
 				session.setVisible(true);
 			}
 		});
