@@ -70,7 +70,6 @@ public class DataforPari {
  		}	
  		return dt;
  	}
-<<<<<<< HEAD
 
     // 	Add Pari
     public void addPari(int userID, String sitePari, String datePari, int nmbMatch, int nmbMGagnant, float mise, float coteTotale, String gain) {
@@ -136,44 +135,5 @@ public class DataforPari {
  			e.printStackTrace();
  		}
  	}
-=======
-    
- // Delete Pari
- 	public void deletePari(int pariID) {
- 			
- 		try {
- 			Statement st = new Connect_DB().connexion.createStatement();
- 			st.executeUpdate("DELETE FROM `pari` WHERE ID="+pariID);  
- 			JOptionPane.showMessageDialog(null,"Pari Supprimé !"); 
- 		} catch (Exception e) {
- 			JOptionPane.showMessageDialog(null,"Erreur"); 
- 			e.printStackTrace();
- 		}
- 	}
- 	
-//	Update Pari
- 	public void updatePari(int pariID, String datePari, int nmbMatch, int nmbMatchGagnant, float mise, float coteTotale, String gain) {
- 		if (gain.indexOf(".") == -1){gain="NULL";}
- 		try 
-	    {
-	    	if (pariID != 0) {
-    		int i = JOptionPane.showConfirmDialog(null,"Avant de valider pensez à bien re-sélectionner la ligne modifiée, si cela est fait, confirmez vous la modification du pari ? ","", JOptionPane.YES_NO_OPTION);
-    			if (i==0) {
-    				Statement st = new Connect_DB().connexion.createStatement();
-        			st.executeUpdate("UPDATE pari SET datePari='"+datePari+"', nmbMatch="+nmbMatch+", nmbMatchGagnant="+nmbMatchGagnant+
-        								 ", mises="+mise+", cotesTotale="+coteTotale+", gains="+gain+" WHERE ID="+pariID);  
-    			}
-	    	} else {
-	    		JOptionPane.showMessageDialog(null,"Veuillez sélectionné le pari à modifier !"); 
-		    }
-	    }
-	    catch (Exception e)
-	    {
-	    	JOptionPane.showMessageDialog(null,"Erreur modification !"); 
-	    	e.printStackTrace();
-	    }
-	  }	 
-
->>>>>>> branch 'master' of https://github.com/JulienHernanBarragan/mySportsBets_Java
 
 }
