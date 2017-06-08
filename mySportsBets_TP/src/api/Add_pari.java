@@ -22,7 +22,7 @@ public class Add_pari extends JFrame {
 	JTextField TFsitePari, TFdatePari, TFmise, TFcoteTotale, TFgains;
 	JSpinner SnmbMatch, SnmbMatchGagnant;
 	JButton Breturn, BaddPari;
-	String RdatePari, RmaisonPari;
+	String RdatePari, RmaisonPari, Rgain;
 	int RnmbMatch, RnmbMatchGagnant;
 	float Rmise, RcoteTotale;
 	
@@ -42,8 +42,20 @@ public class Add_pari extends JFrame {
 		
 		TFsitePari = new JTextField();
 		TFsitePari.setBounds(164, 49, 116, 22);
+		TFsitePari.setText("unibet");
 		pan.add(TFsitePari);
 		TFsitePari.setColumns(10);
+		
+		datePari = new JLabel("Date du Pari :");
+		datePari.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		datePari.setBounds(391, 43, 134, 28);
+		pan.add(datePari);
+		
+		TFdatePari = new JTextField();
+		TFdatePari.setBounds(537, 49, 116, 22);
+		TFdatePari.setText("2017-01-01");
+		pan.add(TFdatePari);
+		TFdatePari.setColumns(10);
 		
 		nmbMatch = new JLabel("Nombres de Match :");
 		nmbMatch.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -82,51 +94,53 @@ public class Add_pari extends JFrame {
 		
 		TFmise = new JTextField();
 		TFmise.setBounds(104, 214, 81, 22);
+		TFmise.setText("0.0");
 		pan.add(TFmise);
 		TFmise.setColumns(10);
 		
 		TFcoteTotale = new JTextField();
+		TFcoteTotale.setText("0.0");
 		TFcoteTotale.setBounds(339, 214, 81, 22);
 		pan.add(TFcoteTotale);
 		TFcoteTotale.setColumns(10);
 		
 		TFgains = new JTextField();
 		TFgains.setBounds(568, 214, 81, 22);
+		TFgains.setText("0.0");
 		pan.add(TFgains);
 		TFgains.setColumns(10);
-		
-		datePari = new JLabel("Date du Pari :");
-		datePari.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		datePari.setBounds(391, 43, 134, 28);
-		pan.add(datePari);
-		
-		TFdatePari = new JTextField();
-		TFdatePari.setBounds(537, 49, 116, 22);
-		pan.add(TFdatePari);
-		TFdatePari.setColumns(10);
 		
 		BaddPari = new JButton("Ajouter le Pari");
 		BaddPari.setBounds(460, 280, 236, 60);
 		BaddPari.addActionListener(new ActionListener()  {
 			public void actionPerformed(ActionEvent e)  {
-    		// récup des données
+    		// Data
 				RmaisonPari = TFsitePari.getText();
 				Rmise = Float.parseFloat(TFmise.getText());
 				RcoteTotale = Float.parseFloat(TFcoteTotale.getText());
 				RdatePari = TFdatePari.getText();
 				RnmbMatch = Integer.parseInt(SnmbMatch.getValue().toString());
 				RnmbMatchGagnant = Integer.parseInt(SnmbMatchGagnant.getValue().toString());
-				System.out.println(RnmbMatch);
+				if (TFgains.getText() == "0.0") {
+					Rgain = "NULL";
+					new DataforPari().addPari(1,RmaisonPari, RdatePari, RnmbMatch, RnmbMatchGagnant, Rmise, RcoteTotale, Rgain);
+				} else {
+					Rgain = TFgains.getText();
+					new DataforPari().addPari(1,RmaisonPari, RdatePari, RnmbMatch, RnmbMatchGagnant, Rmise, RcoteTotale, Rgain);
+				}
 				
-			// insert BDD
-				new DataforPari().addPari(1,RmaisonPari, RdatePari, RnmbMatch, RnmbMatchGagnant, Rmise, RcoteTotale);
-				dispose();
 			}
 		});
 		pan.add(BaddPari);
 		
 		Breturn = new JButton("Retour Home");
 		Breturn.setBounds(84, 280, 236, 60);
+		Breturn.addActionListener(new ActionListener()  {
+			public void actionPerformed(ActionEvent e) {
+				Home session = new Home();
+				session.setVisible(true);
+			}
+		});
 		pan.add(Breturn);
 
 	}

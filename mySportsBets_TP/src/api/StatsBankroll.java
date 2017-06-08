@@ -9,13 +9,15 @@ import javax.swing.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
-public class Bankroll extends JFrame {
+public class StatsBankroll extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	static JPanel pan;
-	JLabel titre, nmbpari, misestotale, gainstotale, bankroll;
+	static JPanel pan, panNorth, panChartSouth, panSouth;
 	@SuppressWarnings("rawtypes")
 	JComboBox CBdate;
 	JButton validCB;
@@ -26,13 +28,15 @@ public class Bankroll extends JFrame {
 	JFreeChart pieChartRatioMatch;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Bankroll() {
+	public StatsBankroll() {
 		
 		pan = new JPanel();
     	pan.setLayout(null);
     	pan.setBackground(new Color(0, 0, 128));
-		setSize(700,400);
+		setSize(1200,800);
+		pan.setBackground(new Color(102, 204, 153));
 		setContentPane(pan);
+		pan.setLayout(new GridLayout(0, 1, 0, 0));
 		setLocationRelativeTo(null);
 		
 		resultBankroll = new databaseProcessing.DataforPari().dataBankroll(datepari);
@@ -44,16 +48,35 @@ public class Bankroll extends JFrame {
 		DBnmbMGTotal = Integer.parseInt(resultBankrollArray[4]);
 		DBbankroll = DBgainstotal - DBmisestotale;
 		
-		titre = new JLabel("Bilan");
-		titre.setForeground(Color.WHITE);
-		titre.setFont(new Font("Times New Roman", Font.PLAIN, 40));
-		titre.setBounds(289, 11, 154, 47);
-		pan.add(titre);
+		// Pan North
+		panNorth = new JPanel();
+		pan.add(panNorth);
+		panNorth.setLayout(new BorderLayout(0, 0));
+		
+		DefaultPieDataset pieDataset1 = new DefaultPieDataset();
+		pieDataset1.setValue("Valeur1", new Integer(27));
+		pieDataset1.setValue("Valeur2", new Integer(10));
+		pieDataset1.setValue("Valeur3", new Integer(50));
+		pieDataset1.setValue("Valeur4", new Integer(5));
+		
+		JFreeChart pieChart1 = ChartFactory.createPieChart("Bankroll",
+		pieDataset1, true, true, true);
+		Plot plot2 = pieChart1.getPlot();
+		plot2.setBackgroundPaint(Color.white);
+		pieChart1.setBackgroundPaint(new Color(102, 204, 153));
+		ChartPanel c1Panel = new ChartPanel(pieChart1);
+		panNorth.add(c1Panel, BorderLayout.CENTER);
+		c1Panel.setLayout(new BorderLayout(0, 0));
+		
+		// Panel Chart South
+		panChartSouth = new JPanel();
+		c1Panel.add(panChartSouth, BorderLayout.SOUTH);
+		panChartSouth.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		CBdate = new JComboBox();
 		CBdate.setModel(new DefaultComboBoxModel(new String[] {"Année 2017", "Janvier 2017", "Février 2017", "Mars 2017", "Avril 2017", "Mai 2017", "Juin 2017", "Juillet 2017", "Août 2017", "Septembre 2017", "Octobre 2017", "Novembre 2017", "Décembre 2017"}));		
 		CBdate.setBounds(522, 41, 120, 20);
-		pan.add(CBdate);
+		panChartSouth.add(CBdate);
 		
 		validCB = new JButton();
 		validCB.addActionListener(new ActionListener()  {
@@ -96,48 +119,49 @@ public class Bankroll extends JFrame {
 				DBbankroll = DBgainstotal - DBmisestotale;
 				
 				if (datepari == "'2017/01/01' and '2017/12/31'") {
-					nmbpari.setText("Vous avez jouez un nombre de "+DBnmbpari+" paris.");
-					misestotale.setText("Votre mise globale est de "+DBmisestotale+" Euros.");
-					gainstotale.setText("Vos gains sont élevés à "+DBgainstotal+" Euros.");
-					DBbankroll = DBgainstotal - DBmisestotale;
-					bankroll.setText("Votre Bankroll est de "+DBbankroll+" Euros.");
+					
 				} else {
-					nmbpari.setText("Vous avez jouez un nombre de "+DBnmbpari+" paris ce mois-ci.");
-					misestotale.setText("Votre mise globale est de "+DBmisestotale+" Euros ce mois-ci.");
-					gainstotale.setText("Vos gains sont élevés à "+DBgainstotal+" Euros ce mois-ci.");
-					DBbankroll = DBgainstotal - DBmisestotale;
-					bankroll.setText("Votre Bankroll est de "+DBbankroll+" Euros ce mois-ci.");
+					
 				}
 				
 			}
 		});
 		validCB.setBounds(648, 40, 26, 23);
-		pan.add(validCB);
+		panChartSouth.add(validCB);
 		
-		nmbpari = new JLabel("Vous avez jouez un nombre de "+DBnmbpari+" paris.");
-		nmbpari.setForeground(Color.WHITE);
-		nmbpari.setFont(new Font("Times New Roman", Font.PLAIN, 17));
-		nmbpari.setBounds(100, 87, 464, 28);
-		pan.add(nmbpari);
+		// Pan South
+		panSouth = new JPanel();
+		pan.add(panSouth);
+		panSouth.setLayout(new GridLayout(0, 3, 0, 0));
 		
-		misestotale = new JLabel("Votre mise globale est de "+DBmisestotale+" Euros.");
-		misestotale.setForeground(Color.WHITE);
-		misestotale.setFont(new Font("Times New Roman", Font.PLAIN, 17));
-		misestotale.setBounds(100, 137, 429, 28);
-		pan.add(misestotale);
+		// PieChart for ratio Match win / Match Loses
+		dataPieforMatch = new DefaultPieDataset();
+		DBnmbMPTotal = DBnmbMatchTotal - DBnmbMGTotal;
+		dataPieforMatch.setValue(DBnmbMPTotal+" Match Perdant", DBnmbMPTotal);
+		dataPieforMatch.setValue(DBnmbMGTotal+" Match Gagnant", DBnmbMGTotal);
+	
+		pieChartRatioMatch = ChartFactory.createPieChart("Ratio des Paris de Match Gagnant/Perdant",
+		dataPieforMatch, true, true, true);
+		pieChartRatioMatch.setBackgroundPaint(new Color(102, 204, 153));
+		Plot plot1 = pieChartRatioMatch.getPlot();
+		plot1.setBackgroundPaint(Color.white);
+		ChartPanel cPanel = new ChartPanel(pieChartRatioMatch);
+		cPanel.setBounds(100, 252, 343, 28);
+		cPanel.setBackground(new Color(102, 204, 153));
+		panSouth.add(cPanel);
 		
-		gainstotale = new JLabel("Vos gains sont élevés à "+DBgainstotal+" Euros.");
-		gainstotale.setForeground(Color.WHITE);
-		gainstotale.setFont(new Font("Times New Roman", Font.PLAIN, 17));
-		gainstotale.setBounds(100, 192, 325, 28);
-		pan.add(gainstotale);
+		// BarChart for Gains and Mises
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		dataset.addValue(DBmisestotale, "Mises = " + DBmisestotale, "");
+		dataset.addValue(DBgainstotal, "Gains = " + DBgainstotal, "");
 		
-		bankroll = new JLabel("Votre Bankroll est de "+DBbankroll+" Euros.");
-		bankroll.setForeground(Color.WHITE);
-		bankroll.setFont(new Font("Times New Roman", Font.PLAIN, 17));
-		bankroll.setBounds(100, 252, 343, 28);
-		pan.add(bankroll);
-		
+		JFreeChart barChart = ChartFactory.createBarChart("Mises/Gains", "",
+		"Montant en Euros", dataset, PlotOrientation.VERTICAL, true, true, false);
+		Plot plot = barChart.getPlot();
+		plot.setBackgroundPaint(Color.white);
+		barChart.setBackgroundPaint(new Color(102, 204, 153));
+		ChartPanel cPanel2 = new ChartPanel(barChart);
+		panSouth.add(cPanel2);
 	}
 }
 

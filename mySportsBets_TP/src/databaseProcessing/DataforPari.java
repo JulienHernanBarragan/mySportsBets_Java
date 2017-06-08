@@ -72,9 +72,9 @@ public class DataforPari {
  	}
 
     // 	Add Pari
-    public void addPari(int userID, String sitePari, String datePari, int nmbMatch, int nmbMGagnant, float mise, float coteTotale) {
+    public void addPari(int userID, String sitePari, String datePari, int nmbMatch, int nmbMGagnant, float mise, float coteTotale, String gain) {
 	    try 
-	    {
+	    {	
 	    	if (nmbMatch != 0) {
 		    	int i = JOptionPane.showConfirmDialog(null,"Confirmez vous le pari ?","", JOptionPane.YES_NO_OPTION); 
 		    	if (i == 0) {
@@ -82,11 +82,11 @@ public class DataforPari {
 			    	st.executeUpdate("INSERT INTO `pari`(`siteParis`, datePari, `nmbmatch`, `nmbMatchGagnant`, `cotesTotale`, `mises`, "+
 			    			         "gains, ID_user) "+
 			    			         "VALUES ('"+sitePari+"', '"+datePari+"',"+nmbMatch+", "+nmbMGagnant+", "+coteTotale+", "+
-			    			         mise+", NULL, "+userID+")");
+			    			         mise+", "+gain+", "+userID+")");
 			    					JOptionPane.showMessageDialog(null,"Votre pari a bien été enregistrer");  
 		    	}
 	    	} else {
-	    		JOptionPane.showMessageDialog(null,"Veuillez indiquer toutes les informations (Exception du gains !"); 
+	    		JOptionPane.showMessageDialog(null,"Veuillez indiquer toutes les informations (Exceptions du gains !"); 
 	    	}	  	
 	    }
 	    catch (Exception e)

@@ -29,7 +29,7 @@ public class Home extends JFrame {
 	private JTable pari;
 	private JButton addPari, updatePari, deletePari, Bankroll;
 	private String datePari;
-	private int pariID=0, nmbMatch, nmbMatchGagnant = 0;
+	private int pariID = 0, nmbMatch, nmbMatchGagnant = 0;
 	private float mise, coteTotale;
 	private String gain = "NULL";
 	
@@ -117,6 +117,7 @@ public class Home extends JFrame {
 				// Update PariList
 				new DataforPari().tablePariList(1).fireTableDataChanged();
 				pari.setModel(new DataforPari().tablePariList(1));
+                pariID = 0;
 			}
 		});
 		southPan.add(deletePari);
@@ -125,7 +126,7 @@ public class Home extends JFrame {
 		Bankroll.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		Bankroll.addActionListener(new ActionListener()  {
 			public void actionPerformed(ActionEvent e) {
-				Bankroll session = new Bankroll();
+				StatsBankroll session = new StatsBankroll();
 				session.setVisible(true);
 			}
 		});
