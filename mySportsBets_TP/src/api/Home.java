@@ -92,6 +92,7 @@ public class Home extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Add_pari session = new Add_pari();
 				session.setVisible(true);
+				dispose();
 			}
 		});
 		southPan.add(addPari);

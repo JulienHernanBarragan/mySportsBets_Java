@@ -15,7 +15,6 @@ public class Connect_DB {
 				Class.forName("com.mysql.jdbc.Driver");
 				url = new String("jdbc:mysql://localhost:3306/mysportbets_2");
 				connexion = (Connection) DriverManager.getConnection(url,"root","");
-				System.out.println("Connexion réussi");
 			} catch (ClassNotFoundException e) {
 				System.out.println(e.getMessage());
 			} catch (SQLException e) {

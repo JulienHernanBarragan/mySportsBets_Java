@@ -1,5 +1,6 @@
 package api;
 
+import api.Home;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -128,7 +129,9 @@ public class Add_pari extends JFrame {
 					Rgain = TFgains.getText();
 					new DataforPari().addPari(1,RmaisonPari, RdatePari, RnmbMatch, RnmbMatchGagnant, Rmise, RcoteTotale, Rgain);
 				}
-				
+				Home session = new Home();
+				session.setVisible(true);
+				dispose();
 			}
 		});
 		pan.add(BaddPari);
@@ -139,7 +142,9 @@ public class Add_pari extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Home session = new Home();
 				session.setVisible(true);
+				dispose();
 			}
 		});
+		pan.add(Breturn);
 	}
 }
