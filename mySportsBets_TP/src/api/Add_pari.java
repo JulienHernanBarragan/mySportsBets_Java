@@ -3,6 +3,7 @@ package api;
 import api.Home;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,15 +24,17 @@ public class Add_pari extends JFrame {
 	private JTextField TFsitePari, TFdatePari, TFmise, TFcoteTotale, TFgains;
 	private JSpinner SnmbMatch, SnmbMatchGagnant;
 	private JButton Breturn, BaddPari;
-	private String RdatePari, RmaisonPari, Rgain;
+	private String RdatePari, RmaisonPari;
 	private int RnmbMatch, RnmbMatchGagnant;
-	private float Rmise, RcoteTotale;
+	private float Rmise, RcoteTotale, Rgain;
 	
 	public Add_pari (int idUser, String nomUser) {
 		setBounds(100, 100, 800, 400);
 		pan = new JPanel();
 		pan.setBackground(new Color(102, 204, 153));
 		pan.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Add_pari.class.getResource("/image/logo.png")));
+		setTitle("mySportsBets : Ajouter un pari");
 		setResizable(false);
 		setContentPane(pan);
 		pan.setLayout(null);
@@ -95,7 +98,7 @@ public class Add_pari extends JFrame {
 		
 		TFmise = new JTextField();
 		TFmise.setBounds(104, 214, 81, 22);
-		TFmise.setText("0.0");
+		TFmise.setText("20");
 		pan.add(TFmise);
 		TFmise.setColumns(10);
 		
@@ -107,7 +110,7 @@ public class Add_pari extends JFrame {
 		
 		TFgains = new JTextField();
 		TFgains.setBounds(568, 214, 81, 22);
-		TFgains.setText("0.0");
+		TFgains.setText("0");
 		pan.add(TFgains);
 		TFgains.setColumns(10);
 		
@@ -122,13 +125,10 @@ public class Add_pari extends JFrame {
 				RdatePari = TFdatePari.getText();
 				RnmbMatch = Integer.parseInt(SnmbMatch.getValue().toString());
 				RnmbMatchGagnant = Integer.parseInt(SnmbMatchGagnant.getValue().toString());
-				if (TFgains.getText() == "0.0") {
-					Rgain = "NULL";
-					new DataforPari().addPari(idUser,RmaisonPari, RdatePari, RnmbMatch, RnmbMatchGagnant, Rmise, RcoteTotale, Rgain);
-				} else {
-					Rgain = TFgains.getText();
-					new DataforPari().addPari(idUser,RmaisonPari, RdatePari, RnmbMatch, RnmbMatchGagnant, Rmise, RcoteTotale, Rgain);
-				}
+				Rgain = Float.parseFloat(TFgains.getText());
+
+				new DataforPari().addPari(idUser,RmaisonPari, RdatePari, RnmbMatch, RnmbMatchGagnant, Rmise, RcoteTotale, Rgain);
+					
 				Home session = new Home(idUser, nomUser);
 				session.setVisible(true);
 				dispose();

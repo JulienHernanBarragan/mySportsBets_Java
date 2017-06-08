@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -30,13 +31,13 @@ public class Home extends JFrame {
 	private JButton addPari, updatePari, deletePari, Bankroll;
 	private String datePari;
 	private int pariID = 0, nmbMatch, nmbMatchGagnant = 0;
-	private float mise, coteTotale;
-	private String gain = "NULL";
+	private float mise, coteTotale, gain;
 	
 	public Home(int idUser, String nomUser) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 800);
 		setTitle("MySportsBets : Home");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Home.class.getResource("/image/logo.png")));
 		pan = new JPanel();
 		pan.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pan);
@@ -68,13 +69,7 @@ public class Home extends JFrame {
                 	nmbMatchGagnant = Integer.parseInt(pari.getValueAt(row,3).toString());
                 	mise = Float.parseFloat(pari.getValueAt(row,4).toString());
                 	coteTotale = Float.parseFloat(pari.getValueAt(row,5).toString());
-                	if (pari.getValueAt(row,6) !=  null && pari.getValueAt(row,6) !=  "") {
-                		gain = pari.getValueAt(row,6).toString();
-    	                System.out.println(pariID+";"+datePari+";"+nmbMatch+";"+nmbMatchGagnant+";"+mise+";"+coteTotale+";"+gain);
-                	} else {
-                		gain = 	"NULL";
-    	                System.out.println(pariID+";"+datePari+";"+nmbMatch+";"+nmbMatchGagnant+";"+mise+";"+coteTotale+";"+gain);
-                	}
+                	gain = Float.parseFloat(pari.getValueAt(row,6).toString());
             }	           
         });
 		JScrollPane SCtable = new JScrollPane(pari);		

@@ -72,7 +72,7 @@ public class DataforPari {
  	}
 
     // 	Add Pari
-    public void addPari(int userID, String sitePari, String datePari, int nmbMatch, int nmbMGagnant, float mise, float coteTotale, String gain) {
+    public void addPari(int userID, String sitePari, String datePari, int nmbMatch, int nmbMGagnant, float mise, float coteTotale, float gain) {
 	    try 
 	    {	
 	    	if (nmbMatch != 0) {
@@ -96,8 +96,7 @@ public class DataforPari {
 	  }
     
 //	Update Pari
- 	public void updatePari(int pariID, String datePari, int nmbMatch, int nmbMatchGagnant, float mise, float coteTotale, String gain) {
- 		if (gain.indexOf(".") == -1){gain="NULL";}
+ 	public void updatePari(int pariID, String datePari, int nmbMatch, int nmbMatchGagnant, float mise, float coteTotale, float gain) {
  		try 
 	    {
 	    	if (pariID != 0) {

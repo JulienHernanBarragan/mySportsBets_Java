@@ -2,11 +2,13 @@ package api;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,6 +34,8 @@ public class Login extends JFrame {
 		pan = new JPanel();
 		pan.setBackground(new Color(102, 204, 153));
 		pan.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/image/logo.png")));
+		setTitle("mySportsBets : Login");
 		setContentPane(pan);
 		pan.setLayout(null);
 		
@@ -47,8 +51,9 @@ public class Login extends JFrame {
 		LPassword.setBounds(158, 468, 313, 110);
 		pan.add(LPassword);
 		
-		Llogo = new JLabel("Logo");
-		Llogo.setBounds(106, 65, 956, 219);
+		Llogo = new JLabel();
+		Llogo.setBounds(200, 65, 835, 219);
+		Llogo.setIcon(new ImageIcon(Login.class.getResource("/image/Logo4x.png")));
 		pan.add(Llogo);
 		
 		Tlog = new JTextField();
@@ -80,7 +85,7 @@ public class Login extends JFrame {
 		
 		Bconnect = new JButton("Connexion");
 		Bconnect.setFont(new Font("Roboto", Font.BOLD, 44));
-		Bconnect.setForeground(new Color(0, 250, 154));
+		Bconnect.setForeground(new Color(102, 204, 153));
 		Bconnect.setBackground(Color.WHITE);
 		Bconnect.addActionListener(new ActionListener()  {
 			@SuppressWarnings("deprecation")

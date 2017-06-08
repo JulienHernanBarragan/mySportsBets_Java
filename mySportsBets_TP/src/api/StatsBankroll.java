@@ -36,11 +36,12 @@ public class StatsBankroll extends JFrame {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public StatsBankroll(int idUser, String nomUser) {
-		
 		pan = new JPanel();
     	pan.setLayout(null);
 		setSize(1200,800);
 		pan.setBackground(new Color(102, 204, 153));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(StatsBankroll.class.getResource("/image/logo.png")));
+		setTitle("mySportsBets : Statistiques et Bankroll");
 		setContentPane(pan);
 		pan.setLayout(new GridLayout(0, 1, 0, 0));
 		setLocationRelativeTo(null);
