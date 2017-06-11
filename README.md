@@ -7,10 +7,10 @@ Julien Hernandez, Laurent Perez
 
 Guide d'installation
 -------------
-Grâce à Git, importez le projet sur Eclipse ou autre (https://github.com/JulienHernanBarragan/mySportsBets_Java.git)
-Une fois le projet importé, veuillez ré-importer les librairies externes (JfreeChart et MySQLConnector) présente dans le dossier lib_ext si elles ne sont pas détectés.
-Installez la base de données sql sur votre serveur,les config de log sont par défault (jdbc:mysql://localhost:3306/mysportbets_TP,"root","","") si elles doivent être changés, celle-ci sont dans le package databaseProcessing, class Connect_DB, public Connect_DB().
-Enfin lors du démarrage de l'application pour se logger le pseudo est profJava, son password est 123456.
+- Grâce à Git, importez le projet sur Eclipse ou autre (https://github.com/JulienHernanBarragan/mySportsBets_Java.git)
+- Une fois le projet importé, veuillez ré-importer les librairies externes (JfreeChart et MySQLConnector) présente dans le dossier     lib_ext si elles ne sont pas détectés.
+- Installez la base de données sql sur votre serveur,les config de log sont par défault (jdbc:mysql://localhost:3306/mysportbets_TP,"root","","") si elles doivent être changés, celle-ci sont dans le package databaseProcessing, class Connect_DB, public Connect_DB().
+- Enfin lors du démarrage de l'application pour se logger le pseudo est profJava, son password est 123456.
 
 
 L'application **mySportsBets** est destinée à une utilisation personnelle. Elle permet de répertorier tous vos paris sportifs et génère une bankroll avec des statistiques annuelles et mensuelles. 
@@ -37,11 +37,6 @@ Depuis cette liste il est possible :
  - De modifier un pari
  - De supprimer un pari
  - D'accéder à la Bankroll
-
-
-La liste des paris sportifs
--------------
-Hey! I'm your first Markdown document in **StackEdit**[^stackedit]. Don't delete me, I'm very helpful! I can be recovered anyway in the **Utils** tab of the <i class="icon-cog"></i> **Settings** dialog.
 
 La Bankroll
 -------------
